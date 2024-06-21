@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../generated/locale_keys.g.dart';
+import '../../generated/locale_keys.g.dart';
+import '../../router/router.dart';
+
+@RoutePage()
 
 class ResponsiveNavBarPage extends StatelessWidget {
   ResponsiveNavBarPage({Key? key}) : super(key: key);
@@ -107,15 +111,26 @@ class _ProfileIcon extends StatelessWidget {
     return PopupMenuButton<Menu>(
         icon: const Icon(Icons.person),
         offset: const Offset(0, 40),
-        onSelected: (Menu item) {},
+        onSelected: (Menu item) {
+          if(item == Menu.itemOne){AutoRouter.of(context).push(ProfileRoute1());}
+          if(item == Menu.itemTwo){
+            if(context.locale.languageCode == 'ru') {
+              context.setLocale(Locale('en'));
+            }
+            else {
+              context.setLocale(Locale('ru'));
+            }
+          }
+          if(item == Menu.itemThree){AutoRouter.of(context).push(SignInRoute2());}
+        },
         itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
           PopupMenuItem<Menu>(
             value: Menu.itemOne,
             child: Text(LocaleKeys.Account.tr()),
           ),
-          PopupMenuItem<Menu>(
+          const PopupMenuItem<Menu>(
             value: Menu.itemTwo,
-            child: Text(LocaleKeys.Main.tr()),
+            child: Icon(Icons.language),
           ),
           PopupMenuItem<Menu>(
             value: Menu.itemThree,

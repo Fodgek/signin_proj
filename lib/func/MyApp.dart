@@ -1,14 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:signin_proj/screens/sign_up.dart';
+import 'package:signin_proj/features/auth/sign_up_screen.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+import '../router/router.dart';
+
+class MyApp extends StatefulWidget {
+
+
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _appRouter = AppRouter();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Demo',
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -17,7 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      home: const SignInPage2(),
+      routerConfig: _appRouter.config(),
     );
   }
 }

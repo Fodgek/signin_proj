@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../generated/locale_keys.g.dart';
+import '../../generated/locale_keys.g.dart';
+import '../../router/router.dart';
+
+@RoutePage()
 
 class SignInPage2 extends StatelessWidget {
   const SignInPage2({Key? key}) : super(key: key);
@@ -138,7 +142,7 @@ class __FormContentState extends State<_FormContent> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
-                    /// do something
+                    AutoRouter.of(context).push(ResponsiveNavBarRoute());
                   }
                 },
               ),

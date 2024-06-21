@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../generated/locale_keys.g.dart';
+import '../../generated/locale_keys.g.dart';
+import '../../router/router.dart';
 
+@RoutePage()
 
 class ProfilePage1 extends StatelessWidget {
   const ProfilePage1({Key? key}) : super(key: key);
@@ -31,11 +34,27 @@ class ProfilePage1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton.extended(
-                        onPressed: () {},
+                        onPressed: () {
+                          if(context.locale.languageCode == 'ru') {
+                            context.setLocale(Locale('en'));
+                          }
+                          else {
+                            context.setLocale(Locale('ru'));
+                          }
+                        },
+                        heroTag: 'lang',
+                        elevation: 0,
+                        label: const Text("lang"),
+                        icon: const Icon(Icons.language),
+                      ),
+                      FloatingActionButton.extended(
+                        onPressed: () {
+                          AutoRouter.of(context).push(ResponsiveNavBarRoute());
+                        },
                         heroTag: 'main',
                         elevation: 0,
                         backgroundColor: Colors.red,
-                        label: const Text("Main"),
+                        label:  Text(LocaleKeys.Main.tr()),
                         icon: const Icon(Icons.message_rounded),
                       ),
                     ],
